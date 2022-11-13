@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+        integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- CSS only -->
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+
+<body>
+    <div class="container">
+        <div id="todo">
+            <div class="color-header">
+            </div>
+            <div class="todo-header"><span>To-do list</span></div>
+            <div class="todo-icon"> <img onclick="sortList()" class="filter" src="img/icon.png" alt="">
+            </div>
+            <div class="todo-input">
+
+                <input class="inputElement" type="text">
+                <i class="fa-solid fa-circle-xmark icon"></i>
+                <!-- <span class="xicon">x</span> -->
+            </div>
+            <div id="addTodo" class="addTodo">
+                <!-- <div class="todoPart"> <span class="todoText">AyselMemmedova</span> 
+              <i class="fa-solid fa-circle-xmark"></i>  -->
+
+
+            </div>
+            <div class="button"><img src="img/imagebtn.svg" alt=""></div>
+            <span class="clear">Clear All</span>
+        </div>
+
+        <script src="script.js">
+
+        </script>
+        <script>
+            function sortList() {
+                let myul,
+                    rows,
+                    switching,
+                    i,
+                    x,
+                    y,
+                    shouldSwitch,
+                    dir,
+                    switchcount = 0;
+                myul = document.getElementById("addTodo");
+                switching = true;
+                dir = "asc";
+                while (switching) {
+                    switching = false;
+                    rows = myul.getElementsByTagName("div");
+                    for (i = 0; i < rows.length - 1; i++) {
+                        shouldSwitch = false;
+                        x = rows[i];
+                        y = rows[i + 1];
+                        if (dir == "asc") {
+                            if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+                                shouldSwitch = true;
+                                break;
+                            }
+                        } else if (dir == "desc") {
+                            if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+                                shouldSwitch = true;
+                                break;
+                            }
+                        }
+                    }
+                    if (shouldSwitch) {
+                        rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+                        switching = true;
+                        switchcount++;
+                    } else {
+                        if (switchcount == 0 && dir == "asc") {
+                            dir = "desc";
+                            switching = true;
+                        }
+                    }
+                }
+            }
+
+        </script>
+</body>
+
+</html>
